@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('veterinario_especialidad', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('veterinarios_id');
+            $table->unsignedBigInteger('especialidad_id');
             $table->timestamps();
+
+            $table->foreign('veterinarios_id')->references('id')->on('veterinarios');
+            $table->foreign('especialidad_id')->references('id')->on('especialidad');
+            
         });
     }
 

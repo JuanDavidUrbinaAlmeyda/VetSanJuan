@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('horario_atencion', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('veterinarios_id');
+            $table->string('dia_semana');
+            $table->time('hora_inicio');
+            $table->time('hora_fin');
             $table->timestamps();
+
+            $table->foreign('veterinarios_id')->references('id')->on('veterinarios');
+
         });
     }
 

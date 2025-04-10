@@ -17,7 +17,7 @@ class VeterinarioEspecialidadFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nombre_especialidad' => fake()->sentence(),
         ];
     }
 }
