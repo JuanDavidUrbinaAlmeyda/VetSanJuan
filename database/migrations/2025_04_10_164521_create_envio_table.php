@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('envio', function (Blueprint $table) {
             $table->id();
-            $table->string("direccion_id");
+            $table->string("direccion");
             $table->double("costo_envio");
             $table->date("fecha_envio");
 
