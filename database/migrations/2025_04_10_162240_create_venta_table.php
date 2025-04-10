@@ -16,13 +16,11 @@ return new class extends Migration
         Schema::create('venta', function (Blueprint $table) {
             $table->id();
 
-            $table->date("fecha");
-
-            $table->double("total_venta");
-
             $table->unsignedBigInteger("cliente_id");
             $table->foreign("cliente_id") -> references("id") -> on("clientes");
             
+            $table->date("fecha");
+
             $table->timestamps();
         });
     }
