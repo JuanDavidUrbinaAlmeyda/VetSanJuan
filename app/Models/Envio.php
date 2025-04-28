@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Envio extends Model
 {
+    protected $table = 'envio';
     use HasFactory;
 }

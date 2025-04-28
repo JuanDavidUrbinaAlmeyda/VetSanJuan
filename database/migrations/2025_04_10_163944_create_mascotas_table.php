@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreignId('sexo_id')->references('id')->on('sexo');
             $table->foreignId('color_id')->references('id')->on('color');
             $table->integer('edad');
-            $table->foreignId('tamaño_id')->references('id')->on('tamanos');
+            $table->foreignId('tamano_id')->references('id')->on('tamanos');
             $table->float('peso');
             $table->string('vacunas')->nullable();
             $table->string('alergias')->nullable();

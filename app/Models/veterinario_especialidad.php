@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class veterinario_especialidad extends Model
 {
-    /** @use HasFactory<\Database\Factories\VeterinarioEspecialidadFactory> */
+    protected $table = 'veterinario_especialidad';
     use HasFactory;
 }

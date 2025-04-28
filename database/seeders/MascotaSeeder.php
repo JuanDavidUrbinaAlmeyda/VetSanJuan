@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Mascota;
+use App\Models\Mascotas;
 use Faker\Factory as Faker;
 
 class MascotaSeeder extends Seeder
@@ -13,7 +13,7 @@ class MascotaSeeder extends Seeder
         $faker = Faker::create();
 
         foreach (range(1, 10) as $index) {
-            Mascota::create([
+            Mascotas::create([
                 'nombre_mascota' => $faker->firstName,
                 'fecha_nacimiento' => $faker->date(),
                 'cliente_id' => rand(1, 10), // Asumiendo que tienes 10 clientes
@@ -22,7 +22,7 @@ class MascotaSeeder extends Seeder
                 'sexo_id' => rand(1, 2),     // Asumiendo que tienes 2 sexos (masculino, femenino)
                 'color_id' => rand(1, 5),    // Asumiendo que tienes 5 colores
                 'edad' => rand(1, 15),
-                'tamaño' => ['Pequeño', 'Mediano', 'Grande'][rand(0, 2)],
+                'tamano_id' => rand(1, 3),   // Asumiendo que tienes 3 tamaños
                 'peso' => $faker->randomFloat(2, 1, 10),
                 'vacunas' => $faker->sentence,
                 'alergias' => $faker->sentence,

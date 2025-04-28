@@ -2,18 +2,18 @@
 
 namespace Database\Seeders;
 
-use App\Models\Tamano;
+use App\Models\Tamanos;
 use Illuminate\Database\Seeder;
 
 class TamanoSeeder extends Seeder
 {
     public function run()
     {
-        $tamaños = ['Pequeño', 'Mediano', 'Grande'];
+        $tamanos = ['Pequeño', 'Mediano', 'Grande'];
 
-        foreach ($tamaños as $tamaño) {
-            Tamano::create([
-                'descripcion' => $tamaño,
+        foreach ($tamanos as $tamano) {
+            Tamanos::create([
+                'descripcion' => $tamano,
             ]);
         }
     }

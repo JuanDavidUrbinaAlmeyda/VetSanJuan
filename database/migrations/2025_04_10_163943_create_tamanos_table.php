@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('tamanos', function (Blueprint $table) {
             $table->id();
-            $table->string('descripción');
+            $table->string('descripcion');
             $table->timestamps();
         });
     }
