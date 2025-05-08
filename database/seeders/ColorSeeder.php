@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Color;
-
 class ColorSeeder extends Seeder
 {
     /**
@@ -13,15 +12,21 @@ class ColorSeeder extends Seeder
      */
     public function run(): void
     {
-        $colores = [
-            ['descripcion' => 'Negro'],
-            ['descripcion' => 'Blanco'],
-            ['descripcion' => 'Marrón'],
-            ['descripcion' => 'Gris'],
-            ['descripcion' => 'Atigrado'],
+        $color=[
+            ['description'=>'Blanco'],
+            ['description'=>'Negro'],
+            ['description'=>'Marrón'],
+            ['description'=>'Gris'],
+            ['description'=>'Amarillo'],
+            ['description'=>'Naranja'],
+            ['description'=>'Rojo'],
+            ['description'=>'Verde'],
+            ['description'=>'Azul'],
+            ['description'=>'Violeta'],
+            ['description'=>'Rosa'],
+            ['description'=>'Beige'],
         ];
-
-        foreach ($colores as $color) {
+        foreach($color as $color){
             Color::create($color);
         }
     }

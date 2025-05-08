@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Raza;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,23 +13,27 @@ class RazaSeeder extends Seeder
      */
     public function run(): void
     {
-        $razas = [
-            ['nombre' => 'Labrador', 'especie_id' => 1],
-            ['nombre' => 'Bulldog', 'especie_id' => 1],
-            ['nombre' => 'Persa', 'especie_id' => 2],
-            ['nombre' => 'Siamés', 'especie_id' => 2],
-            ['nombre' => 'Enano', 'especie_id' => 3],
-            ['nombre' => 'Ruso', 'especie_id' => 4],
-            ['nombre' => 'Aldabra', 'especie_id' => 5],
-            ['nombre' => 'Amazonas', 'especie_id' => 6],
-            ['nombre' => 'Betta', 'especie_id' => 7],
-            ['nombre' => 'Cheetah', 'especie_id' => 8],
-            ['nombre' => 'Panthera', 'especie_id' => 9],
-            ['nombre' => 'Bengal Tiger', 'especie_id' => 10],
-        ];
+      $raza =[
+        ['nombre_raza' => 'Labrador'],
+        ['nombre_raza' => 'Bulldog'],
+        ['nombre_raza' => 'Beagle'],
+        ['nombre_raza' => 'Poodle'],
+        ['nombre_raza' => 'Siamés'],
+        ['nombre_raza' => 'Persa'],
+        ['nombre_raza' => 'Maine'],
+        ['nombre_raza' => 'Ragdoll'],
+        ['nombre_raza' => 'Amazona'],
+        ['nombre_raza' => 'Cacique'],
+        ['nombre_raza' => 'Aldabra'],
+        ['nombre_raza' => 'Holland Lop'],
+        ['nombre_raza' => 'Mini Rex'],
+        ['nombre_raza' => 'Himalayo'],
+        ['nombre_raza' => 'Bengalí'],
+        ['nombre_raza' => 'Sphynx'],
+      ];
 
-        foreach ($razas as $raza) {
-            \App\Models\Raza::create($raza);
-        }
+      foreach ($raza as $raza) {
+        Raza::create($raza);
+      }
     }
 }

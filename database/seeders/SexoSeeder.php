@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Sexo;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Sexo;
 
 class SexoSeeder extends Seeder
 {
@@ -13,12 +13,11 @@ class SexoSeeder extends Seeder
      */
     public function run(): void
     {
-        $sexos = [
-            ['descripcion' => 'Macho'],
-            ['descripcion' => 'Hembra'],
+        $sexo = [
+            ['description' => 'Macho'],
+            ['description' => 'Hembra'],
         ];
-
-        foreach ($sexos as $sexo) {
+        foreach($sexo as $sexo){
             Sexo::create($sexo);
         }
     }

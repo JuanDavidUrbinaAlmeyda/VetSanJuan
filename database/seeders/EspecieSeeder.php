@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Especie;
 
 class EspecieSeeder extends Seeder
 {
@@ -13,20 +14,15 @@ class EspecieSeeder extends Seeder
     public function run(): void
     {
         $especies = [
-            ['nombre' => 'Perro'],
-            ['nombre' => 'Gato'],
-            ['nombre' => 'Conejo'],
-            ['nombre' => 'Hámster'],
-            ['nombre' => 'Tortuga'],
-            ['nombre' => 'Loro'],
-            ['nombre' => 'Pez'],
-            ['nombre' => 'Guepardo'],
-            ['nombre' => 'León'],
-            ['nombre' => 'Tigre'],
+            ['nombre_especie' => 'Perro'],
+            ['nombre_especie' => 'Gato'],
+            ['nombre_especie' => 'Loro'],
+            ['nombre_especie' => 'Tortuga'],
+            ['nombre_especie' => 'Conejo'],
         ];
 
         foreach ($especies as $especie) {
-            \App\Models\Especie::create($especie);
+            Especie::create($especie);
         }
     }
 }
