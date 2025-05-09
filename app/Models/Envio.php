@@ -9,4 +9,10 @@ class Envio extends Model
 {
     protected $table = 'envio';
     use HasFactory;
+
+    public function venta()
+    {
+        return $this->belongsTo(Venta::class);
+    }
+
 }

@@ -9,4 +9,16 @@ class Venta extends Model
 {
     protected $table = 'venta';
     use HasFactory;
+
+    public function productos()
+    {
+        return $this->belongsToMany(Productos::class, 'venta_producto')
+                    ->withPivot('cantidad', 'sub_total');
+    }
+
+    public function envio()
+    {
+        return $this->hasOne(Envio::class);
+    }
+
 }
