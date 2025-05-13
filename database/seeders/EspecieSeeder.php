@@ -13,7 +13,7 @@ class EspecieSeeder extends Seeder
      */
     public function run(): void
     {
-        $especies = [
+        $especie = [
             ['nombre_especie' => 'Perro'],
             ['nombre_especie' => 'Gato'],
             ['nombre_especie' => 'Loro'],
@@ -21,7 +21,7 @@ class EspecieSeeder extends Seeder
             ['nombre_especie' => 'Conejo'],
         ];
 
-        foreach ($especies as $especie) {
+        foreach ($especie as $especie) {
             Especie::create($especie);
         }
     }

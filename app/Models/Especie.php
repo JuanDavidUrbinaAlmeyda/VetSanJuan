@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Especie extends Model
 {
-    protected $table = 'especies'; // Nombre de la tabla en la BD
+    protected $table = 'especie'; // Nombre de la tabla en la BD
     protected $fillable = ['nombre']; // Campo 'nombre' en lugar de 'name'
 
     public function razas()

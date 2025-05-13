@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text("description");
 	        $table->double("precio_unitario");
 	        $table->integer("cantidad_inventario");
+            $table->string("url_imagen")->nullable();
             $table->timestamps();
         });
     }
