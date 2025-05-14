@@ -6,10 +6,10 @@ use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::prefix('/products')->controller(ProductController::class)->group(function(){
-    Route::get('/','shop');
+    Route::get('/','shop')->name('shop');
 });
 
 Route::get('/dashboard', function () {

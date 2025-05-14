@@ -21,6 +21,9 @@ return new class extends Migration
 	        $table->integer("cantidad_inventario");
             $table->string("url_imagen")->nullable();
             $table->timestamps();
+            $table->string("categoria")->nullable();
+            $table->string("marca")->nullable();
+            $table->string("subcategoria")->nullable();
         });
     }
 
