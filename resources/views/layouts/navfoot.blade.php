@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
-
+    <link rel="icon" href="favicon.png" type="image/png">
     <link
         href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sigmar&display=swap"
         rel="stylesheet">
@@ -86,7 +86,7 @@
                     <!-- Perros -->
                     <li class="nav-item flex-fill text-center">
                         <a class="nav-link" href="#">
-                            <img src="{{ asset('perro.png') }}" alt="Perros" width="25" height="25"
+                            <img src="{{ asset('perro.png') }}" alt="Perros" width="30" height="30"
                                 class="me-1">
                             Perros
                         </a>
@@ -95,7 +95,7 @@
                     <!-- Gatos -->
                     <li class="nav-item flex-fill text-center">
                         <a class="nav-link" href="#">
-                            <img src="{{ asset('gato.png') }}" alt="Gatos" width="30" height="30"
+                            <img src="{{ asset('gato.png') }}" alt="Gatos" width="28" height="28"
                                 class="me-1">
                             Gatos
                         </a>
@@ -111,21 +111,7 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Aves</a></li>
                             <li><a class="dropdown-item" href="#">Peces</a></li>
-                            <li><a class="dropdown-item" href="#">Pequeños</a></li>
-                        </ul>
-                    </li>
-
-                    <!-- Marcas -->
-                    <li class="nav-item dropdown flex-fill text-center">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            <img src="{{ asset('label.png') }}" alt="Marcas" width="20" height="20"
-                                class="me-1">
-                            Marcas
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Marca 1</a></li>
-                            <li><a class="dropdown-item" href="#">Marca 2</a></li>
-                            <li><a class="dropdown-item" href="#">Marca 3</a></li>
+                            <li><a class="dropdown-item" href="#">Otros</a></li>
                         </ul>
                     </li>
 

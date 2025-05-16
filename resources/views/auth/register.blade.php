@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - VetSanJuan</title>
+    <link rel="icon" href="favicon.png" type="image/png">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Fuentes Google -->
@@ -58,6 +59,26 @@
             border-color: #e2ae23;
             box-shadow: 0 0 0 0.25rem rgba(226, 174, 35, 0.25);
         }
+        
+        .input-group .btn-outline-secondary {
+            border-color: #ced4da;
+            color: #6c757d;
+        }
+        
+        .input-group .btn-outline-secondary:hover {
+            background-color: #f8f9fa;
+            color: #080286;
+        }
+        
+        .input-group .input-registro {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        
+        .input-group .btn {
+            border-top-right-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
     </style>
 </head>
 <body>
@@ -104,14 +125,24 @@
                         <!-- Contraseña -->
                         <div class="mb-4">
                             <label for="password" class="form-label fw-medium">Contraseña</label>
-                            <input id="password" class="form-control input-registro" type="password" name="password" required>
+                            <div class="input-group">
+                                <input id="password" class="form-control input-registro" type="password" name="password" required>
+                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
                             <x-input-error :messages="$errors->get('password')" class="mt-1 text-danger small" />
                         </div>
 
                         <!-- Confirmar Contraseña -->
                         <div class="mb-4">
                             <label for="password_confirmation" class="form-label fw-medium">Confirmar Contraseña</label>
-                            <input id="password_confirmation" class="form-control input-registro" type="password" name="password_confirmation" required>
+                            <div class="input-group">
+                                <input id="password_confirmation" class="form-control input-registro" type="password" name="password_confirmation" required>
+                                <button class="btn btn-outline-secondary" type="button" id="togglePasswordConfirmation">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
                             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-1 text-danger small" />
                         </div>
 
@@ -134,5 +165,38 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Script para mostrar/ocultar contraseña -->
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            }
+        });
+
+        document.getElementById('togglePasswordConfirmation').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password_confirmation');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            }
+        });
+    </script>
 </body>
 </html>

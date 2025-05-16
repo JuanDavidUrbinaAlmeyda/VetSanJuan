@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recuperar Contraseña - VetSanJuan</title>
+    <link rel="icon" href="favicon.png" type="image/png">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Fuentes Google -->
@@ -95,12 +96,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark py-3" style="background-color: #080286;">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-                <img src="{{ asset('favicon.png') }}" alt="Logo" width="40" height="40" class="me-2">
-                <span class="fw-bold fs-4">VetSanJuan</span>
+                <img src="{{ asset('logo.png') }}" alt="Logo" width="40" height="40" class="me-2">
             </a>
-            <button class="btn btn-volver" onclick="window.location.href='{{ url('/') }}'">
-                Volver al inicio
-            </button>
         </div>
     </nav>
 

@@ -22,12 +22,11 @@ class DatabaseSeeder extends Seeder
             TamanoSeeder::class,
             DepartamentoSeeder::class,
             CiudadSeeder::class,
-            CitaServicioSeeder::class,
             CitasSeeder::class,
             ClienteSeeder::class,
             TamanoSeeder::class,
-            MascotaSeeder::class,
-            
+            MascotaSeeder::class,  
+            AdminSeeder::class,
         ]);
     }
 }

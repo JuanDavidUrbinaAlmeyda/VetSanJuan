@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Producto;
 use Illuminate\Http\Request;
-use App\Models\Productos;
 
 class ProductController extends Controller
 {
     public function shop(Request $request)
     {
-        $query = Productos::query();
+        $query = Producto::query();
 
         // Filtros por categoría y subcategoría
         if ($request->filled('categoria')) {
@@ -28,7 +28,7 @@ class ProductController extends Controller
 
         // Puedes agregar más filtros si deseas (precio, marca, etc.)
         $listProducts = $query->paginate(10)->withQueryString();
-        $marcas = Productos::select('marca')
+        $marcas = Producto::select('marca')
             ->whereNotNull('marca')
             ->distinct()
             ->pluck('marca');

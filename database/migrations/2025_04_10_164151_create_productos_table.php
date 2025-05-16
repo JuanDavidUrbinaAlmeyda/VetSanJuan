@@ -19,11 +19,12 @@ return new class extends Migration
             $table->text("description");
 	        $table->double("precio_unitario");
 	        $table->integer("cantidad_inventario");
-            $table->string("url_imagen")->nullable();
+            $table->string("imagen")->nullable();
+            $table->string("presentacion")->nullable();
+            $table->string("especie");
+            $table->string("marca");
+            $table->string("categoria");
             $table->timestamps();
-            $table->string("categoria")->nullable();
-            $table->string("marca")->nullable();
-            $table->string("subcategoria")->nullable();
         });
     }
 

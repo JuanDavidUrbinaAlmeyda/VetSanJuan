@@ -1,6 +1,6 @@
 @extends('layouts.navfoot')
 @section('title')
-    <title>Home</title>
+    <title>Inicio - VetSanJuan</title>
 @endsection
 @section('styles')
 
@@ -107,9 +107,6 @@
 
 @endsection
 @section('content')
-
-
-
     <div id="heroSlider" class="carousel slide mb-0" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">

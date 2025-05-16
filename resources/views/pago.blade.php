@@ -1,6 +1,7 @@
 @extends('layouts.navfoot')
-@section('title', 'Pago')
-
+@section('title')
+    <title>Pago</title>
+@endsection
 @section('content')
 <div class="container py-4">
     <h2 class="mb-4">Resumen de tu compra</h2>

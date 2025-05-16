@@ -1,7 +1,5 @@
 @extends('layouts.navfoot')
 
-@section('title', 'Carrito de Compras')
-
 @section('content')
 <div class="container mt-4">
     <h2 class="mb-4">Carrito de Compras</h2>
