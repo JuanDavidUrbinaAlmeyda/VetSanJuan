@@ -10,7 +10,7 @@ class Producto extends Model
         'nombre',
         'description',
         'especie',
-        'marca',
+        'marca_id',
         'categoria',
         'imagen',
         'edad',
@@ -28,7 +28,7 @@ class Producto extends Model
     {
         return $this->hasMany(Imagen::class, 'producto_id');
     }
-    
+
     public function marca()
     {
         return $this->belongsTo(Marca::class);

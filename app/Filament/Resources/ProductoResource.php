@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProductoResource\Pages;
 use App\Filament\Resources\ProductoResource\RelationManagers;
 use App\Models\Producto;
+use App\Models\Marca;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
@@ -93,24 +94,10 @@ class ProductoResource extends Resource
                         ])
                         ->required(),
 
-                    Select::make('marca')
-                        ->required()
-                        ->options(function () {
-                            return Producto::select('marca')
-                                ->whereNotNull('marca')
-                                ->distinct()
-                                ->pluck('marca', 'marca')
-                                ->toArray();
-                        })
+                    Select::make('marca_id')
+                        ->label('Marca')
+                        ->options(Marca::all()->pluck('nombre', 'id'))
                         ->searchable()
-                        ->createOptionForm([
-                            TextInput::make('marca')
-                                ->required()
-                        ])
-                        ->createOptionUsing(function (array $data) {
-                            // Return the value to be used as the new option
-                            return $data['marca'];
-                        })
                         ->required(),
 
                     Select::make('categoria')
@@ -168,13 +155,23 @@ class ProductoResource extends Resource
             TextColumn::make('categoria')
                 ->sortable(),
 
-            TextColumn::make('marca'),
+            TextColumn::make('marca_id'),
 
             TextColumn::make('especie'),
 
             TextColumn::make('created_at')
                 ->dateTime()
                 ->label('Creado'),
+        ])
+        ->filters([
+            
+        ])
+        ->actions([
+            Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+        ])
+        ->bulkActions([
+            
         ]);
     }
 
@@ -184,6 +181,8 @@ class ProductoResource extends Resource
             //
         ];
     }
+
+
 
     public static function getPages(): array
     {

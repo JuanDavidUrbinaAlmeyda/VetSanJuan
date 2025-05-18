@@ -62,6 +62,40 @@
         .cart-item:last-child {
             border-bottom: none;
         }
+
+        /* Estilo para el dropdown menu */
+        .dropdown-menu {
+            background-color: #f8f9fa;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: none;
+            /* Ocultar por defecto */
+        }
+
+        .nav-item.dropdown:hover .dropdown-menu {
+            display: block;
+            /* Mostrar al pasar el mouse */
+        }
+
+        .dropdown-item {
+            color: #333;
+            padding: 0.75rem 1.5rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: #003673;
+            color: #fff;
+        }
+
+        .nav-link.dropdown-toggle::after {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-item.dropdown:hover .nav-link.dropdown-toggle::after {
+            transform: rotate(180deg);
+        }
     </style>
 </head>
 
@@ -126,21 +160,35 @@
                 <ul class="navbar-nav d-flex w-100 mb-2 mb-lg-0">
 
                     <!-- Perros -->
-                    <li class="nav-item flex-fill text-center">
-                        <a class="nav-link" href="#">
+                    <li class="nav-item dropdown flex-fill text-center">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                             <img src="{{ asset('perro.png') }}" alt="Perros" width="30" height="30"
                                 class="me-1">
                             Perros
                         </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Alimentos</a></li>
+                            <li><a class="dropdown-item" href="#">Accesorios</a></li>
+                            <li><a class="dropdown-item" href="#">Estética e Higiene</a></li>
+                            <li><a class="dropdown-item" href="#">Medicamentos</a></li>
+                            <li><a class="dropdown-item" href="#">Juguetes</a></li>
+                        </ul>
                     </li>
 
                     <!-- Gatos -->
-                    <li class="nav-item flex-fill text-center">
-                        <a class="nav-link" href="#">
+                    <li class="nav-item dropdown flex-fill text-center">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                             <img src="{{ asset('gato.png') }}" alt="Gatos" width="28" height="28"
                                 class="me-1">
                             Gatos
                         </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Alimentos</a></li>
+                            <li><a class="dropdown-item" href="#">Accesorios</a></li>
+                            <li><a class="dropdown-item" href="#">Estética e Higiene</a></li>
+                            <li><a class="dropdown-item" href="#">Medicamentos</a></li>
+                            <li><a class="dropdown-item" href="#">Juguetes</a></li>
+                        </ul>
                     </li>
 
                     <!-- Otras Mascotas -->
@@ -166,8 +214,8 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Veterinaria</a></li>
-                            <li><a class="dropdown-item" href="#">Peluquería</a></li>
-                            <li><a class="dropdown-item" href="#">Entrenamiento</a></li>
+                            <li><a class="dropdown-item" href="#">Baño y Peluquería</a></li>
+                            <li><a class="dropdown-item" href="#">Vacunación</a></li>
                         </ul>
                     </li>
 
@@ -175,19 +223,19 @@
             </div>
         </div>
     </nav>
-    
+
     <!-- Sistema de Notificaciones -->
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
         @if(session('success'))
-            <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header" style="background-color: #e2ae23; color: white;">
-                    <strong class="me-auto">Notificación</strong>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div class="toast-body">
-                    {{ session('success') }}
-                </div>
+        <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header" style="background-color: #e2ae23; color: white;">
+                <strong class="me-auto">Notificación</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
+            <div class="toast-body">
+                {{ session('success') }}
+            </div>
+        </div>
         @endif
     </div>
 
@@ -236,7 +284,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var toastElList = [].slice.call(document.querySelectorAll('.toast'));
