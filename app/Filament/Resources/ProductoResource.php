@@ -11,6 +11,8 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -28,83 +30,151 @@ class ProductoResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
-            TextInput::make('nombre')->required(),
-
-            Textarea::make('description'),
-
-            TextInput::make('precio_unitario')
-                ->label('Precio Unitario Base')
-                ->numeric()
-                ->required(),
-
-            TextInput::make('cantidad_inventario')
-                ->label('Cantidad en Inventario Base')
-                ->numeric()
-                ->required(),
-
-            TextInput::make('categoria')->nullable(),
-            
-            Select::make('marca')
-                ->options(function() {
-                    return Producto::select('marca')
-                        ->whereNotNull('marca')
-                        ->distinct()
-                        ->pluck('marca', 'marca')
-                        ->toArray();
-                })
-                ->searchable()
-                ->createOptionForm([
-                    TextInput::make('marca')
-                        ->required()
-                ])
-                ->nullable(),
-                
-            TextInput::make('subcategoria')->nullable(),
-
-            FileUpload::make('url_imagen')
-                ->label('Imagen')
-                ->image()
-                ->disk('public')
-                ->directory('productos')
-                ->nullable(),
-
-            Repeater::make('presentaciones')
-                ->relationship()
+            Section::make('Información básica')
                 ->schema([
-                    TextInput::make('nombre')
-                        ->label('Presentación')
-                        ->required(),
+                    TextInput::make('nombre')->required(),
+                    Textarea::make('description')->required(),
                     TextInput::make('precio')
+                        ->label('Precio Base')
                         ->numeric()
+                        ->prefix('$')
                         ->required(),
-                    TextInput::make('stock')
-                        ->numeric()
-                        ->required()
                 ])
-                ->columns(3)
-                ->defaultItems(0)
-                ->label('Presentaciones Adicionales'),
+                ->columns(2),
+                
+
+            Section::make('Presentaciones del producto')
+                ->schema([
+                    Repeater::make('presentaciones')
+                        ->relationship()
+                        ->schema([
+                            TextInput::make('nombre')
+                                ->label('Presentación')
+                                ->required(),
+                            TextInput::make('precio_unitario')
+                                ->label('Precio')
+                                ->numeric()
+                                ->prefix('$')
+                                ->required(),
+                            TextInput::make('cantidad_inventario')
+                                ->label('Stock')
+                                ->numeric()
+                                ->required(),
+                            FileUpload::make('imagen')
+                                ->label('Imagen de la presentación')
+                                ->image()
+                                ->disk('public')
+                                ->directory('presentaciones')
+                                ->nullable()
+                        ])
+                        ->columns(4)
+                        ->defaultItems(0)
+                        ->label('Presentaciones'),
+                ])
+                ->collapsible(),
+
+            Section::make('Categorización')
+                ->schema([
+                    Select::make('especie')
+                        ->options([
+                            'perro' => 'Perro',
+                            'gato' => 'Gato',
+                            'aves' => 'Aves',
+                            'peces' => 'Peces',
+                            'otros' => 'Otros',
+                        ])
+                        ->required(),
+
+                    Select::make('edad')
+                        ->options([
+                            'cachorro' => 'Cachorro',
+                            'adulto' => 'Adulto',
+                            'senior' => 'Senior',
+                        ])
+                        ->required(),
+
+                    Select::make('marca')
+                        ->required()
+                        ->options(function () {
+                            return Producto::select('marca')
+                                ->whereNotNull('marca')
+                                ->distinct()
+                                ->pluck('marca', 'marca')
+                                ->toArray();
+                        })
+                        ->searchable()
+                        ->createOptionForm([
+                            TextInput::make('marca')
+                                ->required()
+                        ])
+                        ->createOptionUsing(function (array $data) {
+                            // Return the value to be used as the new option
+                            return $data['marca'];
+                        })
+                        ->required(),
+
+                    Select::make('categoria')
+                        ->options([
+                            'Alimentos' => 'Alimentos',
+                            'Accesorios' => 'Accesorios',
+                            'Estética e Higiene' => 'Estética e Higiene',
+                            'Medicamentos' => 'Medicamentos',
+                            'Juguetes' => 'Juguetes',
+                        ])
+                        ->required(),
+
+                    Forms\Components\Checkbox::make('destacado')
+                        ->label('Producto destacado')
+                        ->helperText('Si se marca, este producto se mostrará en la página de inicio')
+                        ->default(false),
+
+                    FileUpload::make('imagen')
+                        ->label('Imagen principal')
+                        ->image()
+                        ->disk('public')
+                        ->directory('productos')
+                        ->nullable()
+                ])
+                ->columns(2),
         ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table->columns([
-            TextColumn::make('nombre')->searchable()->sortable(),
-
-            TextColumn::make('precio_unitario')
-                ->label('Precio')
-                ->money('cop')
+            TextColumn::make('nombre')
+                ->searchable()
                 ->sortable(),
 
-            TextColumn::make('cantidad_inventario')
-                ->label('Inventario'),
+            TextColumn::make('presentaciones.nombre')
+                ->label('Presentaciones')
+                ->listWithLineBreaks()
+                ->limitList(3)
+                ->expandableLimitedList(),
 
-            TextColumn::make('categoria')->sortable(),
+            TextColumn::make('presentaciones.precio_unitario')
+                ->label('Precios')
+                ->money('cop')
+                ->listWithLineBreaks()
+                ->limitList(3)
+                ->expandableLimitedList(),
+
+            TextColumn::make('presentaciones.cantidad_inventario')
+                ->label('Stock')
+                ->listWithLineBreaks()
+                ->limitList(3)
+                ->expandableLimitedList(),
+
+            TextColumn::make('categoria')
+                ->sortable(),
+
             TextColumn::make('marca'),
-            TextColumn::make('subcategoria'),
 
-            TextColumn::make('created_at')->dateTime()->label('Creado'),
+            TextColumn::make('especie'),
+
+            TextColumn::make('created_at')
+                ->dateTime()
+                ->label('Creado'),
         ]);
     }
 

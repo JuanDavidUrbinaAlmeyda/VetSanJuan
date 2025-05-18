@@ -15,15 +15,16 @@ return new class extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
-            $table->string("nombre");
-            $table->text("description");
-	        $table->double("precio_unitario");
-	        $table->integer("cantidad_inventario");
-            $table->string("imagen")->nullable();
-            $table->string("presentacion")->nullable();
-            $table->string("especie");
-            $table->string("marca");
-            $table->string("categoria");
+            $table->string('nombre');
+            $table->text('description');
+            $table->string('especie');
+            $table->foreignId('marca_id')->constrained('marcas')->onDelete('cascade');
+            $table->string('edad');
+            $table->string('categoria');
+            $table->string('imagen')->nullable();
+            $table->string('destacado')->nullable();
+            $table->decimal('precio', 10, 2);
+            $table->integer('cantidad_inventario')->default(0);
             $table->timestamps();
         });
     }

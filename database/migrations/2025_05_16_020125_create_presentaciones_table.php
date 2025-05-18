@@ -12,8 +12,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('producto_id')->constrained()->onDelete('cascade');
             $table->string('nombre');
-            $table->decimal('precio', 10, 2);
-            $table->integer('stock')->default(0);
+            $table->decimal('precio_unitario', 10, 2);
+            $table->integer('cantidad_inventario');
+            $table->string('imagen')->nullable();
             $table->timestamps();
         });
     }

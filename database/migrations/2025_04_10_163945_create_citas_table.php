@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('hora');
             $table->foreignId('cliente_id')->references('id')->on('clientes');
             $table->foreignId('mascota_id')->references('id')->on('mascotas');
-            $table->foreignId('veterinario_id')->references('id')->on('veterinarios');
             $table->timestamps();
         });
     }

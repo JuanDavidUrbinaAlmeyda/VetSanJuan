@@ -9,17 +9,32 @@ class Producto extends Model
     protected $fillable = [
         'nombre',
         'description',
-        'precio_unitario',
-        'cantidad_inventario',
-        'categoria',
+        'especie',
         'marca',
-        'subcategoria',
-        'url_imagen'
+        'categoria',
+        'imagen',
+        'edad',
+        'destacado',
+        'precio',
+        'cantidad_inventario',
     ];
 
     public function presentaciones()
     {
         return $this->hasMany(Presentacion::class);
     }
-}
 
+    public function imagenes()
+    {
+        return $this->hasMany(Imagen::class, 'producto_id');
+    }
+    
+    public function marca()
+    {
+        return $this->belongsTo(Marca::class);
+    }
+
+    protected $casts = [
+        'imagen' => 'array'
+    ];
+}

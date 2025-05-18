@@ -13,4 +13,9 @@ class Marca extends Model
         'nombre'
     ];
 
+    public function productos()
+    {
+        return $this->hasMany(Producto::class);
+    }
+
 }

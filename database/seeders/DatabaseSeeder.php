@@ -15,18 +15,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            EspecieSeeder::class,
-            RazaSeeder::class,
-            SexoSeeder::class,
-            ColorSeeder::class,
-            TamanoSeeder::class,
-            DepartamentoSeeder::class,
-            CiudadSeeder::class,
-            CitasSeeder::class,
-            ClienteSeeder::class,
-            TamanoSeeder::class,
-            MascotaSeeder::class,  
             AdminSeeder::class,
+            MarcaSeeder::class,
+            ProductoSeeder::class,
+            PresentacionSeeder::class,
         ]);
     }
 }

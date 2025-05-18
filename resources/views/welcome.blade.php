@@ -35,7 +35,6 @@
         }
 
         #heroSlider {
-            ;
             /* Reduce todo el slider */
             transform-origin: top center;
 
@@ -103,8 +102,6 @@
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
         }
     </style>
-
-
 @endsection
 @section('content')
     <div id="heroSlider" class="carousel slide mb-0" data-bs-ride="carousel">
@@ -179,65 +176,31 @@
         <h2 class="text-center mb-4">Productos Destacados</h2>
         <div class="row row-cols-1 row-cols-md-4 g-4">
 
-            <!-- Producto 1 -->
-            <div class="col">
-                <div class="card producto-card h-100 border rounded position-relative">
-                    <img src="{{ asset('pp1.jpg') }}" class="card-img-top p-3" alt="Producto 1">
-                    <div class="card-body text-center">
-                        <p class="mb-1 text-muted">Marca Ficticia</p>
-                        <h6 class="card-title">Juguete Para Gato Pájaro Verde</h6>
-                        <p class="fw-bold" style="color:#003673">$3.950</p>
-                        <button class="btn btn-sm text-white rounded-pill" style="background-color: #003673">
-                            <h6 class="mb-0" style="color:white">Comprar</h6>
-                        </button>
+            @forelse($productosDestacados as $producto)
+                <div class="col">
+                    <div class="card producto-card h-100 border rounded position-relative">
+                        @if($producto->imagen)
+                            <img src="{{ asset('storage/' . $producto->imagen) }}" class="card-img-top p-3" alt="{{ $producto->nombre }}">
+                        @else
+                            <img src="{{ asset('placeholder.jpg') }}" class="card-img-top p-3" alt="Imagen no disponible">
+                        @endif
+                        <div class="card-body text-center">
+                            <p class="mb-1 text-muted">{{ $producto->marca->nombre }}</p>
+                            <h6 class="card-title">{{ $producto->nombre }}</h6>
+                            <p class="fw-bold" style="color:#003673">
+                                ${{ number_format($producto->presentaciones->isNotEmpty() ? $producto->presentaciones->first()->precio_unitario : $producto->precio, 0, ',', '.') }}
+                            </p>
+                            <a href="{{ route('shop.producto', $producto->id) }}" class="btn btn-sm text-white rounded-pill" style="background-color: #003673">
+                                <h6 class="mb-0" style="color:white">Comprar</h6>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Producto 2 -->
-            <div class="col">
-                <div class="card producto-card h-100 border rounded position-relative">
-                    <img src="{{ asset('pp2.png') }}" class="card-img-top p-3" alt="Producto 2">
-                    <div class="card-body text-center">
-                        <p class="mb-1 text-muted">Mascota Store</p>
-                        <h6 class="card-title">Cepillo Para Perro Antienredos</h6>
-                        <p class="fw-bold" style="color:#003673">$9.050</p>
-                        <button class="btn btn-sm text-white rounded-pill" style="background-color:#003673">
-                            <h6 class="mb-0" style="color:white">Comprar</h6>
-                        </button>
-                    </div>
+            @empty
+                <div class="col-12 text-center">
+                    <p>No hay productos destacados disponibles en este momento.</p>
                 </div>
-            </div>
-
-            <!-- Producto 3 -->
-            <div class="col">
-                <div class="card producto-card h-100 border rounded position-relative">
-                    <img src="{{ asset('pp3.png') }}" class="card-img-top p-3" alt="Producto 3">
-                    <div class="card-body text-center">
-                        <p class="mb-1 text-muted">Gatitos Co.</p>
-                        <h6 class="card-title">Juguete Para Gato Ratón Marrón</h6>
-                        <p class="fw-bold" style="color:#003673">$2.950</p>
-                        <button class="btn btn-sm text-white rounded-pill" style="background-color: #003673">
-                            <h6 class="mb-0" style="color:white">Comprar</h6>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Producto 4 -->
-            <div class="col">
-                <div class="card producto-card h-100 border rounded position-relative">
-                    <img src="{{ asset('pp4.png') }}" class="card-img-top p-3" alt="Producto 4">
-                    <div class="card-body text-center">
-                        <p class="mb-1 text-muted">AnimalFun</p>
-                        <h6 class="card-title">Juguete Estrella Con Plumas</h6>
-                        <p class=" fw-bold" style="color:#003673">$2.950</p>
-                        <button class="btn btn-sm text-white rounded-pill" style="background-color: #003673">
-                            <h6 class="mb-0" style="color:white">Comprar</h6>
-                        </button>
-                    </div>
-                </div>
-            </div>
+            @endforelse
 
         </div>
     </div>

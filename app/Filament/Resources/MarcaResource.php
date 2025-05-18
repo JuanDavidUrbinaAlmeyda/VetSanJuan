@@ -17,7 +17,11 @@ class MarcaResource extends Resource
 {
     protected static ?string $model = Marca::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-bookmark';
+    
+    protected static ?string $navigationLabel = 'Marcas';
+    
+    protected static ?string $modelLabel = 'Marca';
 
     public static function form(Form $form): Form
     {
@@ -25,6 +29,8 @@ class MarcaResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('nombre')
                     ->required()
+                    ->unique(ignoreRecord: true)
+                    ->label('Nombre de la marca')
                     ->maxLength(255),
             ]);
     }
@@ -33,13 +39,21 @@ class MarcaResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nombre')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('nombre')
+                    ->label('Nombre')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Fecha de creación')
+                    ->dateTime('d/m/Y H:i')
+                    ->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

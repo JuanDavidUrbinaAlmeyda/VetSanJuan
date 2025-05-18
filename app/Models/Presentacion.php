@@ -12,8 +12,9 @@ class Presentacion extends Model
     protected $fillable = [
         'producto_id',
         'nombre',
-        'precio',
-        'stock'
+        'precio_unitario',
+        'cantidad_inventario',
+        'imagen'
     ];
 
     public function producto(): BelongsTo

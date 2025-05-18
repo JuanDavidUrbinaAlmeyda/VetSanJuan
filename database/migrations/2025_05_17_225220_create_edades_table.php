@@ -11,16 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('horario_atencion', function (Blueprint $table) {
+        Schema::create('edades', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('veterinarios_id');
-            $table->string('dia_semana');
-            $table->time('hora_inicio');
-            $table->time('hora_fin');
+            $table->string('nombre'); // Por ejemplo: 'cachorro', 'adulto', 'senior'
+            $table->string('descripcion')->nullable();
             $table->timestamps();
-
-            $table->foreign('veterinarios_id')->references('id')->on('veterinarios');
-
         });
     }
 
@@ -29,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('horario_atencion');
+        Schema::dropIfExists('edades');
     }
 };

@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('pago', function (Blueprint $table) {
             $table->id();
             $table->foreignId('metodo_id')->references('id')->on('metodo');
-            $table->foreignId('estado_id')->references('id')->on('estado');
             $table->foreignId('venta_id')->references('id')->on('venta');
             $table->date('fecha_pago');
             $table->decimal('monto_pago');

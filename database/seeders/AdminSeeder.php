@@ -14,7 +14,8 @@ class AdminSeeder extends Seeder
             'name' => 'Administrador',
             'email' => 'veterinariasanjuan77@gmail.com',
             'password' => Hash::make('Millonario77.'),
-            'role' => 'admin'
+            'role' => 'admin',
+            'estado' => 'activo'
         ]);
     }
 }

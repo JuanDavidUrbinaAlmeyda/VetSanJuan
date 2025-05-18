@@ -44,6 +44,24 @@
             font-weight: 600;
             font-size: 1.5rem;
         }
+
+        .offcanvas {
+            max-width: 350px;
+        }
+
+        .cart-items {
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            border-bottom: 1px solid #eee;
+            padding: 1rem 0;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
     </style>
 </head>
 
@@ -67,10 +85,34 @@
 
         </a>
         <!-- Carrito -->
-        <a href="#" class="btn rounded-pill" style="background-color: #e2ae23">
+        <a href="#" class="btn rounded-pill" style="background-color: #e2ae23" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
             <img src="{{ asset('cart.png') }}" alt="Gatos" width="35" height="35" class="me-1">
-
         </a>
+    </div>
+
+    <!-- Offcanvas Carrito -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="cartOffcanvasLabel">Tu Carrito</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            @if(isset($cartItems) && count($cartItems) > 0)
+            <!-- Aquí irán los productos del carrito -->
+            <div class="cart-items">
+                <!-- Iteración de productos -->
+            </div>
+            @else
+            <div class="text-center py-4">
+                <img src="{{ asset('gatoyperro.png') }}" alt="Perrito triste" class="img-fluid mb-3" style="max-width: 200px;">
+                <h5 class="mb-3">¡Carrito vacío!</h5>
+                <p class="text-muted mb-4">No hagas esperar a tus peludos</p>
+                <a href="{{ route('shop') }}" class="btn btn-primary rounded-pill" style="background-color: #003673">
+                    Ir a la tienda
+                </a>
+            </div>
+            @endif
+        </div>
     </div>
 
     <!-- 🧭 Navbar inferior -->
@@ -133,6 +175,22 @@
             </div>
         </div>
     </nav>
+    
+    <!-- Sistema de Notificaciones -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        @if(session('success'))
+            <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header" style="background-color: #e2ae23; color: white;">
+                    <strong class="me-auto">Notificación</strong>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    {{ session('success') }}
+                </div>
+            </div>
+        @endif
+    </div>
+
     @yield('content')
 
     <footer class="py-4" style="background-color: #e2ae23;">
@@ -178,5 +236,21 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var toastElList = [].slice.call(document.querySelectorAll('.toast'));
+            var toastList = toastElList.map(function(toastEl) {
+                return new bootstrap.Toast(toastEl, {
+                    autohide: true,
+                    delay: 3000
+                });
+            });
 
+            // Mostrar todos los toasts
+            toastList.forEach(toast => toast.show());
+        });
+    </script>
+
+    @stack('scripts')
 </body>

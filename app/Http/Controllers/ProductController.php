@@ -12,35 +12,48 @@ class ProductController extends Controller
         $query = Producto::query();
 
         // Filtros por categoría y subcategoría
+        if ($request->filled('especie')) {
+            $query->where('especie', $request->especie);
+        }
+
         if ($request->filled('categoria')) {
             $query->where('categoria', $request->categoria);
         }
-
-        if ($request->filled('subcategoria')) {
-            $query->where('subcategoria', $request->subcategoria);
-        }
         if ($request->filled('precio_max')) {
-            $query->where('precio_unitario', '<=', $request->precio_max);
+            $query->where('precio', '<=', $request->precio_max);
         }
-        if ($request->filled('marca')) {
-            $query->where('marca', $request->marca);
+        if ($request->filled('marca_id')) {
+            $query->where('marca_id', $request->marca_id);
+        }
+        if ($request->filled('edad')) {
+            $query->where('edad', $request->edad);
         }
 
-        // Puedes agregar más filtros si deseas (precio, marca, etc.)
         $listProducts = $query->paginate(10)->withQueryString();
-        $marcas = Producto::select('marca')
-            ->whereNotNull('marca')
-            ->distinct()
-            ->pluck('marca');
+        $marcas = \App\Models\Marca::pluck('nombre', 'id');
 
         return view('shop', [
             'listProducts' => $listProducts,
+            'especie' => $request->especie,
             'categoria' => $request->categoria,
-            'subcategoria' => $request->subcategoria,
+            'edad' => $request->edad,
             'precio_max' => $request->precio_max,
-            'marca' => $request->marca,
+            'marca_id' => $request->marca_id,
             'marcas' => $marcas,
-
         ]);
+    }
+    public function home()
+    {
+        $productosDestacados = \App\Models\Producto::where('destacado', true)
+            ->with('presentaciones')
+            ->take(4)
+            ->get();
+
+        return view('welcome', compact('productosDestacados'));
+    }
+    public function showProduct($id)
+    {
+        $producto = Producto::with(['imagenes', 'presentaciones'])->findOrFail($id);
+        return view('showProduct', compact('producto'));
     }
 }

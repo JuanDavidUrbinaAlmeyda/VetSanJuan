@@ -29,6 +29,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandName("VetSanJuan")
             ->brandLogo(asset("favicon.png"))
             ->brandLogoHeight("60px")
+            ->sidebarFullyCollapsibleOnDesktop()
             ->colors([
                 'primary' => "#DDA853",
                 'secondary' => "#27548A",

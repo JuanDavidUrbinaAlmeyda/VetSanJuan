@@ -39,6 +39,6 @@ class PagoController extends Controller
         // Limpiar carrito
         Session::forget('carrito');
 
-        return redirect()->route('home')->with('success', '¡Compra realizada con éxito!');
+        return redirect('/')->with('success', '¡Compra realizada con éxito!');
     }
 }
