@@ -150,27 +150,21 @@
             <!-- Peluquería y Baño -->
             <div class="col-6 col-md-3 mb-4">
                 <div class="icon-circle mx-auto" style="width: 100px; height: 100px; padding: 15px;">
-                    <a href="{{ route('dashboard', ['section'=>'peluqueria']) }}">
-                        <img src="{{ asset('tijeras.png') }}" alt="Peluquería y Baño" class="img-fluid">
-                    </a>
+                    <img src="{{ asset('tijeras.png') }}" alt="Peluquería y Baño" class="img-fluid">
                 </div>
                 <h5 class="mt-2">Baño y Peluquería</h5>
             </div>
             <!-- Veterinaria -->
             <div class="col-6 col-md-3 mb-4">
                 <div class="icon-circle mx-auto" style="width: 100px; height: 100px; padding: 15px;">
-                    <a href="{{ route('dashboard', ['section'=>'veterinaria']) }}">
-                        <img src="{{ asset('vet.png') }}" alt="Veterinaria" class="img-fluid">
-                    </a>
+                    <img src="{{ asset('vet.png') }}" alt="Veterinaria" class="img-fluid">
                 </div>
                 <h5 class="mt-2">Veterinaria</h5>
             </div>
             <!-- Vacunación -->
             <div class="col-6 col-md-3 mb-4">
                 <div class="icon-circle mx-auto" style="width: 100px; height: 100px; padding: 15px;">
-                    <a href="{{ route('dashboard', ['section'=>'vacunacion']) }}">
-                        <img src="{{ asset('jer.png') }}" alt="Vacunación" class="img-fluid">
-                    </a>
+                    <img src="{{ asset('jer.png') }}" alt="Vacunación" class="img-fluid">
                 </div>
                 <h5 class="mt-2">Vacunación</h5>
             </div>

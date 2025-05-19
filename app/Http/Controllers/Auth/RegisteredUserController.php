@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
-use App\Models\Cliente;
 
 class RegisteredUserController extends Controller
 {
@@ -43,17 +42,6 @@ class RegisteredUserController extends Controller
             'role' => 'cliente',
             'estado' => 'activo'
         ]);
-
-        Cliente::create([
-        'nombre' => $user->name,
-        'apellido' => '',        // Puedes ajustarlo si el formulario lo pide
-        'email' => $user->email,
-        'telefono' => '',
-        'direccion' => '',
-        'ciudad' => '',
-        'ciudad_id' => rand(1, 5),     // Valor aleatorio entre 1 y 5
-        'user_id' => $user->id,
-    ]);
 
         event(new Registered($user));
 

@@ -16,13 +16,6 @@ class Producto extends Model
         'edad',
         'destacado',
         'precio',
-        'especie',
-        'marca',
-        'categoria',
-        'imagen',
-        'edad',
-        'destacado',
-        'precio',
         'cantidad_inventario',
     ];
 
@@ -45,5 +38,3 @@ class Producto extends Model
         'imagen' => 'array'
     ];
 }
-
-   
