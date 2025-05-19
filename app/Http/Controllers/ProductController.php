@@ -16,6 +16,10 @@ class ProductController extends Controller
             $query->where('especie', $request->especie);
         }
 
+        if ($request->filled('especie')) {
+            $query->where('especie', $request->especie);
+        }
+
         if ($request->filled('categoria')) {
             $query->where('categoria', $request->categoria);
         }
@@ -24,24 +28,33 @@ class ProductController extends Controller
         }
         if ($request->filled('marca_id')) {
             $query->where('marca_id', $request->marca_id);
+            $query->where('precio', '<=', $request->precio_max);
         }
+        if ($request->filled('marca_id')) {
+            $query->where('marca_id', $request->marca_id);
+        }
+        if ($request->filled('edad')) {
+            $query->where('edad', $request->edad);
         if ($request->filled('edad')) {
             $query->where('edad', $request->edad);
         }
 
         $listProducts = $query->paginate(10)->withQueryString();
         $marcas = \App\Models\Marca::pluck('nombre', 'id');
+        $marcas = \App\Models\Marca::pluck('nombre', 'id');
 
         return view('shop', [
             'listProducts' => $listProducts,
             'especie' => $request->especie,
+            'especie' => $request->especie,
             'categoria' => $request->categoria,
             'edad' => $request->edad,
+            'edad' => $request->edad,
             'precio_max' => $request->precio_max,
-            'marca_id' => $request->marca_id,
+            'marca_id_id' => $request->marca_id_id,
             'marcas' => $marcas,
         ]);
-    }
+    }}
     public function home()
     {
         $productosDestacados = \App\Models\Producto::where('destacado', true)
@@ -56,4 +69,5 @@ class ProductController extends Controller
         $producto = Producto::with(['imagenes', 'presentaciones'])->findOrFail($id);
         return view('showProduct', compact('producto'));
     }
+  
 }

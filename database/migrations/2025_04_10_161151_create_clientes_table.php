@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('ciudad');
             $table->foreignId('ciudad_id')->references('id')->on('ciudades');
+            $table->foreignId('user_id')->references('id')->on('users');
         });
     }
 

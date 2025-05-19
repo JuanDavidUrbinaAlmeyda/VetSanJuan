@@ -80,12 +80,37 @@
                 <i class="bi bi-search "></i>
             </button>
         </form>
-        <a href="{{ route('login') }}" class="btn rounded-pill" style="background-color: #e2ae23">
-            <img src="{{ asset('cuenta.png') }}" alt="Gatos" width="35" height="35" class="me-1">
+        @guest
+            <!-- Si el usuario NO está logueado -->
+            <a href="{{ route('login') }}" class="btn rounded-pill" style="background-color: #e2ae23">
+                <img src="{{ asset('cuenta.png') }}" alt="Cuenta" width="35" height="35" class="me-1">
+            </a>
+        @endguest
 
-        </a>
+        @auth
+            <!-- Si el usuario está logueado, muestra dropdown con logout -->
+            <div class="dropdown">
+                <button class="btn dropdown-toggle rounded-pill" type="button" id="userDropdown" data-bs-toggle="dropdown"
+                    aria-expanded="false" style="background-color: #e2ae23">
+                    <img src="{{ asset('cuenta.png') }}" alt="Cuenta" width="35" height="35" class="me-1">
+                    {{ Auth::user()->name }}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                    <li>
+                        <a class="dropdown-item" href="{{ route('dashboard') }}">Perfil</a>
+                    </li>
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button class="dropdown-item" type="submit">Cerrar sesión</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        @endauth
+
         <!-- Carrito -->
-        <a href="#" class="btn rounded-pill" style="background-color: #e2ae23" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+        <a href="{{route('carrito.index')}}" class="btn rounded-pill" style="background-color: #e2ae23">
             <img src="{{ asset('cart.png') }}" alt="Gatos" width="35" height="35" class="me-1">
         </a>
     </div>
@@ -127,7 +152,7 @@
 
                     <!-- Perros -->
                     <li class="nav-item flex-fill text-center">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('shop', ['especie' => 'perro']) }}">
                             <img src="{{ asset('perro.png') }}" alt="Perros" width="30" height="30"
                                 class="me-1">
                             Perros
@@ -136,7 +161,7 @@
 
                     <!-- Gatos -->
                     <li class="nav-item flex-fill text-center">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('shop', ['especie' => 'gato']) }}">
                             <img src="{{ asset('gato.png') }}" alt="Gatos" width="28" height="28"
                                 class="me-1">
                             Gatos
@@ -151,11 +176,15 @@
                             Otras Mascotas
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Aves</a></li>
-                            <li><a class="dropdown-item" href="#">Peces</a></li>
-                            <li><a class="dropdown-item" href="#">Otros</a></li>
+                            <li><a class="dropdown-item" href="{{ route('shop', ['especie' => 'aves']) }}">Aves</a>
+                            </li>
+                            <li><a class="dropdown-item"
+                                    href="{{ route('shop', ['especie' => 'peces']) }}">Peces</a></li>
+                            <li><a class="dropdown-item"
+                                    href="{{ route('shop', ['especie' => 'otros']) }}">Otros</a></li>
                         </ul>
                     </li>
+
 
                     <!-- Servicios -->
                     <li class="nav-item dropdown flex-fill text-center">
@@ -165,9 +194,12 @@
                             Servicios
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Veterinaria</a></li>
-                            <li><a class="dropdown-item" href="#">Peluquería</a></li>
-                            <li><a class="dropdown-item" href="#">Entrenamiento</a></li>
+                            <li><a class="dropdown-item"
+                                    href="{{ route('dashboard', ['section' => 'veterinaria']) }}">Veterinaria</a></li>
+                            <li><a class="dropdown-item"
+                                    href="{{ route('dashboard', ['section' => 'peluqueria']) }}">Peluquería</a></li>
+                            <li><a class="dropdown-item"
+                                    href="{{ route('dashboard', ['section' => 'vacunacion']) }}">Vacunación</a></li>
                         </ul>
                     </li>
 
