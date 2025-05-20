@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('alergias')->nullable();
             $table->string('comentarios')->nullable();
             $table->timestamps();
+            $table->string('foto')->nullable();
         });
     }
 

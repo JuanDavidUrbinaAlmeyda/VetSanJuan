@@ -19,8 +19,7 @@ class ClienteSeeder extends Seeder
                 'direccion' => $faker->address,
                 'telefono' => $faker->phoneNumber,
                 'email' => $faker->unique()->safeEmail,
-                'ciudad' => $faker->city,
-                'ciudad_id' => rand(1, 5), // Suponiendo que tienes 5 ciudades en la base
+                'ciudad_id' => rand(1, 30), 
             ]);
         }
     }

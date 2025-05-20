@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class CarritoController extends Controller
 {
+    public function index()
+    {
+        $carrito = session()->get('carrito', []);
+        return view('carrito.index', compact('carrito'));
+    }
     public function agregar(Request $request, $id)
     {
         $producto = Producto::findOrFail($id);

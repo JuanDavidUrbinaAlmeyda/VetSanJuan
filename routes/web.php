@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CitasController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [App\Http\Controllers\ProductController::class, 'home'])->name('home');
@@ -14,9 +16,12 @@ Route::prefix('/products')->controller(ProductController::class)->group(function
     Route::get('/{id}','showProduct')->name('shop.producto');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::post('/citas/store', [CitasController::class, 'store'])->name('citas.store');
+
+
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -27,7 +32,6 @@ Route::middleware('auth')->group(function () {
 // Rutas del carrito
 Route::get('/carrito', [CarritoController::class, 'index'])->name('carrito.index');
 Route::post('/carrito/agregar/{id}', [CarritoController::class, 'agregar'])->name('carrito.agregar');
-Route::get('/carrito', [CarritoController::class, 'mostrar'])->name('carrito.mostrar');
 Route::delete('/carrito/{id}', [CarritoController::class, 'eliminar'])->name('carrito.eliminar');
 Route::patch('/carrito/{id}', [CarritoController::class, 'actualizar'])->name('carrito.actualizar');
 Route::get('/carrito/limpiar', [CarritoController::class, 'limpiar'])->name('carrito.limpiar');

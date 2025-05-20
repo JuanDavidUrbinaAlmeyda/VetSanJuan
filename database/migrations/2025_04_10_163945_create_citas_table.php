@@ -18,6 +18,9 @@ return new class extends Migration
             $table->foreignId('cliente_id')->references('id')->on('clientes');
             $table->foreignId('mascota_id')->references('id')->on('mascotas');
             $table->timestamps();
+            $table->foreignId('veterinario_id')->references('id')->on('veterinarios');
+            $table->foreignID('tipo_servicio_id')->references('id')->on('servicios');
+
         });
     }
 

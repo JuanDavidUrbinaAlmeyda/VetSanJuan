@@ -3,6 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Cliente;
+use App\Models\Departamento;
+use App\Models\Servicios;
+use App\Models\Sexo;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,6 +24,11 @@ class DatabaseSeeder extends Seeder
             MarcaSeeder::class,
             ProductoSeeder::class,
             PresentacionSeeder::class,
+            ServiciosSeeder::class,
+            DepartamentosSeeder::class,
+            CiudadesSeeder::class,
+            EspecieSeeder::class,
+            SexoSeeder::class,
         ]);
     }
 }

@@ -18,11 +18,11 @@ return new class extends Migration
             $table->timestamps();
             $table->string('nombre');
             $table->string('apellido');
-            $table->string('direccion');
-            $table->string('telefono');
-            $table->string('email')->unique();
-            $table->string('ciudad');
+            $table->string('direccion')->nullable();
+            $table->string('telefono')->nullable();
+            $table->string('email')->unique()->nullable();
             $table->foreignId('ciudad_id')->references('id')->on('ciudades');
+            $table->foreignId('user_id')->references('id')->on('users');
         });
     }
 
