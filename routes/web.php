@@ -43,6 +43,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/pago', [PagoController::class, 'mostrarFormulario'])->name('pago.formulario');
         Route::post('/pago/confirmar', [PagoController::class, 'confirmarPago'])->name('pago.confirmar');
     });
+
+    // Rutas para Nosotros y Contacto
+    Route::get('/nosotros', function () {
+        return view('nosotros');
+    })->name('nosotros');
+    
+    Route::get('/contacto', function () {
+        return view('contacto');
+    })->name('contacto');
 });
 
 require __DIR__.'/auth.php';

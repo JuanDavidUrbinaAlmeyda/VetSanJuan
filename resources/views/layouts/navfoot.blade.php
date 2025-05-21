@@ -158,11 +158,10 @@
                     <div class="cart-item-details">
                         <h6 class="mb-3">{{ $item['nombre'] }}</h6>
                         <div class="quantity-control">
-                            <button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity({{ $id }}, -1)">-</button>
+                            <button class="btn btn-sm btn-outline-secondary">-</button>
                             <input type="number" min="1" value="{{ $item['cantidad'] }}"
-                                class="form-control form-control-sm"
-                                onchange="updateCartItem({{ $id }}, this.value)">
-                            <button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity({{ $id }}, 1)">+</button>
+                                class="form-control form-control-sm">
+                            <button class="btn btn-sm btn-outline-secondary">+</button>
                         </div>
                         <p class="mb-0">
                             <span class="item-price" data-price="{{ $item['precio'] }}">${{ number_format($item['precio'], 2) }}</span>
@@ -301,10 +300,11 @@
                 <div class="col-12 col-md-4 mb-3 mb-md-0">
                     <h5 style="color:white">Enlaces Útiles</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-white text-decoration-none">Inicio</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Productos</a></li>
+                        <li><a href="{{ route('home') }}" class="text-white text-decoration-none">Inicio</a></li>
+                        <li><a href="{{ route('shop') }}" class="text-white text-decoration-none">Productos</a></li>
                         <li><a href="#" class="text-white text-decoration-none">Servicios</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Contacto</a></li>
+                        <li><a href="{{ route('nosotros') }}" class="text-white text-decoration-none">Acerca de Nosotros</a></li>
+                        <li><a href="{{ route('contacto') }}" class="text-white text-decoration-none">Contacto</a></li>
                     </ul>
                 </div>
                 <div class="col-12 col-md-4 text-center mb-3 mb-md-0">
@@ -313,13 +313,13 @@
                 </div>
                 <div class="col-12 col-md-4 text-center text-md-end">
                     <h5 style="color:white">Síguenos</h5>
-                    <a href="#" class="text-white text-decoration-none me-3" style="font-size: 1.5rem;">
+                    <a href="https://www.facebook.com/profile.php?id=61566373787200" class="text-white text-decoration-none me-3" style="font-size: 1.5rem;">
                         <i class="bi bi-facebook"></i>
                     </a>
-                    <a href="#" class="text-white text-decoration-none me-3" style="font-size: 1.5rem;">
+                    <a href="https://www.instagram.com/vetsanjuan.co" class="text-white text-decoration-none me-3" style="font-size: 1.5rem;">
                         <i class="bi bi-instagram"></i>
                     </a>
-                    <a href="#" class="text-white text-decoration-none" style="font-size: 1.5rem;">
+                    <a href="https://www.tiktok.com/@vetsanjuan.co" class="text-white text-decoration-none" style="font-size: 1.5rem;">
                         <i class="bi bi-tiktok"></i>
                     </a>
                 </div>
@@ -331,6 +331,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar los toasts
             var toastElList = [].slice.call(document.querySelectorAll('.toast'));
             var toastList = toastElList.map(function(toastEl) {
                 return new bootstrap.Toast(toastEl, {
@@ -339,31 +340,52 @@
                 });
             });
             toastList.forEach(toast => toast.show());
-        });
 
-        function updateQuantity(id, change) {
-            const input = event.target.parentElement.querySelector('input');
-            const newValue = parseInt(input.value) + change;
-            if (newValue >= 1) {
-                input.value = newValue;
-                updateCartItem(id, newValue);
-            }
-        }
+            // Asignar eventos a los botones de cantidad
+            document.querySelectorAll('.quantity-control button').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const parentDiv = this.closest('.quantity-control');
+                    const input = parentDiv.querySelector('input');
+                    const id = this.closest('.cart-item').getAttribute('data-cart-item');
+                    const change = this.textContent === '+' ? 1 : -1;
+
+                    const newValue = parseInt(input.value) + change;
+                    if (newValue >= 1) {
+                        input.value = newValue;
+                        updateCartItem(id, newValue);
+                    }
+                });
+            });
+
+            // Asignar evento a los inputs de cantidad
+            document.querySelectorAll('.quantity-control input').forEach(input => {
+                input.addEventListener('change', function() {
+                    const id = this.closest('.cart-item').getAttribute('data-cart-item');
+                    const newValue = parseInt(this.value);
+                    if (newValue >= 1) {
+                        updateCartItem(id, newValue);
+                    } else {
+                        this.value = 1;
+                    }
+                });
+            });
+        });
 
         function updateCartItem(id, quantity) {
             const cartItem = document.querySelector(`[data-cart-item="${id}"]`);
-            const priceElement = cartItem.querySelector('.item-price');
-            const price = parseFloat(priceElement.getAttribute('data-price'));
-            const itemTotal = price * quantity;
+            if (!cartItem) return;
 
-            cartItem.querySelector('.item-total').textContent = `$${itemTotal.toFixed(2)}`;
+            const price = parseFloat(cartItem.querySelector('.item-price').getAttribute('data-price'));
+            const total = price * quantity;
 
-            let cartTotal = 0;
-            document.querySelectorAll('.item-total').forEach(el => {
-                cartTotal += parseFloat(el.textContent.replace('$', ''));
-            });
-            document.querySelector('.cart-total').textContent = `$${cartTotal.toFixed(2)}`;
+            // Actualizar el total del item
+            cartItem.querySelector('.item-total').textContent = `$${total.toFixed(2)}`;
 
+            // Recalcular el total del carrito
+            updateCartTotal();
+
+            // Enviar la actualización al servidor
             fetch(`/carrito/${id}`, {
                     method: 'PATCH',
                     headers: {
@@ -379,7 +401,22 @@
                     if (!data.success) {
                         location.reload();
                     }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
                 });
+        }
+
+        function updateCartTotal() {
+            let cartTotal = 0;
+
+            document.querySelectorAll('.cart-item').forEach(item => {
+                const price = parseFloat(item.querySelector('.item-price').getAttribute('data-price'));
+                const quantity = parseInt(item.querySelector('.quantity-control input').value);
+                cartTotal += price * quantity;
+            });
+
+            document.querySelector('.cart-total').textContent = `$${cartTotal.toFixed(2)}`;
         }
     </script>
 
