@@ -297,11 +297,11 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="veterinario_id_peluqueria" class="form-label">Veterinario</label>
-                            <select name="veterinario_id" id="veterinario_id_peluqueria" class="form-select" required>
-                                <option value="" disabled selected>Seleccione un veterinario</option>
-                                @foreach ($veterinarios as $vet)
-                                    <option value="{{ $vet->id }}">{{ $vet->nombre }}</option>
+                            <label for="veterinario_id_peluqueria" class="form-label">Peluquero</label>
+                            <select name="peluquero_id" id="peluquero_id_peluqueria" class="form-select" required>
+                                <option value="" disabled selected>Seleccione un peluquero</option>
+                                @foreach ($peluqueros as $peluquero)
+                                    <option value="{{ $peluquero->id }}">{{ $peluquero->nombre }}</option>
                                 @endforeach
                             </select>
                         </div>

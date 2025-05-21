@@ -135,14 +135,17 @@
                         <!-- Filtro por Marca -->
                         <div class="filtro-seccion">
                             <h5 class="mb-3">Marca</h5>
-                            <select name="marca_id" class="form-control">
-                                <option value="">Todas</option>
+                            <input type="text" id="buscarMarca" class="form-control mb-2" placeholder="Buscar marca...">
+                            <div id="listaMarcas">
                                 @foreach ($marcas as $id => $nombre)
-                                    <option value="{{ $id }}" {{ request('marca_id') == $id ? 'selected' : '' }}>
-                                        {{ $nombre }}
-                                    </option>
+                                    <div class="form-check marca-item" data-nombre="{{ strtolower($nombre) }}">
+                                        <input class="form-check-input" type="radio" name="marca_id" id="marca_{{ $id }}" value="{{ $id }}" {{ request('marca_id') == $id ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="marca_{{ $id }}">
+                                            {{ $nombre }}
+                                        </label>
+                                    </div>
                                 @endforeach
-                            </select>
+                            </div>
                         </div>
 
                         <!-- Filtro por Edad -->

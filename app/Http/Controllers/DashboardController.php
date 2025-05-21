@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Mascotas;
-use App\Models\veterinarios;
+use App\Models\Veterinario;
+use App\Models\Peluquero;
+use App\Models\Especie;
+use App\Models\Sexo;
 
 class DashboardController extends Controller
 {
@@ -13,15 +16,22 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         $cliente = $user->cliente;
-
-        if (!$cliente) {
-            return redirect()->back()->with('error', 'No se encontró un perfil de cliente asociado a este usuario.');
-        }
-
         $mascotas = $cliente->mascotas()->with(['especie', 'sexo'])->get();
         $citas = $cliente->citas()->with(['mascota', 'veterinario', 'servicio'])->get();
-        $veterinarios = veterinarios::all();
+        $veterinarios = Veterinario::all();
+        $especies = Especie::all();
+        $sexos = Sexo::all();
+        $peluqueros = Peluquero::all();
 
-        return view('dashboard', compact('user', 'cliente', 'mascotas', 'citas', 'veterinarios'));
+        return view('dashboard', compact(
+            'user',
+            'cliente',
+            'mascotas',
+            'citas',
+            'veterinarios',
+            'especies',
+            'sexos',
+            'peluqueros'
+        ));
     }
 }

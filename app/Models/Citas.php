@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Cliente;
 use App\Models\Mascotas;
-use App\Models\veterinarios;
+use App\Models\Veterinario;
 use App\Models\Servicios;
 
 class Citas extends Model
@@ -17,6 +17,7 @@ class Citas extends Model
         'mascota_id',
         'tipo_servicio_id',
         'veterinario_id',
+        'peluquero_id',
     ];
 
     public function cliente()
@@ -37,6 +38,11 @@ class Citas extends Model
 
     public function veterinario()
     {
-        return $this->belongsTo(veterinarios::class);
+        return $this->belongsTo(Veterinario::class);
+    }
+
+    public function peluquero()
+    {
+        return $this->belongsTo(Peluquero::class);
     }
 }

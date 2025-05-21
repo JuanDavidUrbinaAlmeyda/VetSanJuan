@@ -16,9 +16,9 @@ class EspecieSeeder extends Seeder
         $especie = [
             ['nombre_especie' => 'Perro'],
             ['nombre_especie' => 'Gato'],
-            ['nombre_especie' => 'Loro'],
-            ['nombre_especie' => 'Tortuga'],
-            ['nombre_especie' => 'Conejo'],
+            ['nombre_especie' => 'Ave'],
+            ['nombre_especie' => 'Pez'],
+            ['nombre_especie' => 'Otro'],
         ];
 
         foreach ($especie as $especie) {

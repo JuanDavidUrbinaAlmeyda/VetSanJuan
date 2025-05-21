@@ -2,15 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Especie extends Model
 {
-    protected $table = 'especie'; // Nombre de la tabla en la BD
-    protected $fillable = ['nombre']; // Campo 'nombre' en lugar de 'name'
+    protected $table = 'especie';
+    
+    protected $fillable = [
+        'nombre'
+    ];
 
-    public function razas()
+    public function mascotas()
     {
-        return $this->hasMany(Raza::class, 'especie_id'); // Relación con Raza
+        return $this->hasMany(Mascotas::class);
     }
 }

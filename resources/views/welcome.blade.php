@@ -209,10 +209,14 @@
         <h2 class="text-center mb-4">Dales la Bienvenida</h2>
         <div class="row g-4">
             <div class="col-12 col-md-6 text-center">
-                <img src="{{ asset('c1.png') }}" alt="Imagen 1" class="img-fluid rounded bienvenida-img">
+                <a href="{{ route('shop', ['especie' => 'perro', 'edad' => 'cachorro']) }}">
+                    <img src="{{ asset('c1.png') }}" alt="Imagen 1" class="img-fluid rounded bienvenida-img">
+                </a>
             </div>
             <div class="col-12 col-md-6 text-center">
-                <img src="{{ asset('c2.png') }}" alt="Imagen 2" class="img-fluid rounded bienvenida-img">
+                <a href="{{ route('shop', ['especie' => 'gato', 'edad' => 'cachorro']) }}">
+                    <img src="{{ asset('c2.png') }}" alt="Imagen 2" class="img-fluid rounded bienvenida-img">
+                </a>
             </div>
         </div>
     </div>

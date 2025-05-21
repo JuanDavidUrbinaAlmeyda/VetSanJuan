@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Citas;
-class veterinarios extends Model
+class Veterinario extends Model
 {
     protected $table = 'veterinarios';
     use HasFactory;
-    protected $fillable = ['nombre', 'especialidad', 'telefono']; // ajusta según tus columnas
+    protected $fillable = ['nombre', 'especialidad', 'correo_electronico', 'horario', 'telefono', 'licencia_profesional', 'fecha_licencia']; // ajusta según tus columnas
 
     public function citas()
     {
