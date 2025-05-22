@@ -12,4 +12,5 @@ class Sexo extends Model
     {
         return $this->belongsTo(Mascotas::class);
     }
+    
 }

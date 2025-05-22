@@ -12,17 +12,18 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [ProductController::class, 'home'])->name('home');
 
-Route::prefix('/products')->controller(ProductController::class)->group(function(){
-    Route::get('/','shop')->name('shop');
-    Route::get('/{id}','showProduct')->name('shop.producto');
+Route::prefix('/products')->controller(ProductController::class)->group(function () {
+    Route::get('/', 'shop')->name('shop');
+    Route::get('/{id}', 'showProduct')->name('shop.producto');
 });
 
-Route::post('/citas/store', [CitasController::class, 'store'])->name('citas.store');
-Route::post('/mascotas', [MascotaController::class, 'store'])->name('mascotas.store');
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
+    Route::post('/citas/store', [CitasController::class, 'store'])->name('citas.store');
+    Route::post('/mascotas', [MascotaController::class, 'store'])->name('mascotas.store');
+
     // Rutas del perfil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -42,16 +43,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // Add these payment routes
         Route::get('/pago', [PagoController::class, 'mostrarFormulario'])->name('pago.formulario');
         Route::post('/pago/confirmar', [PagoController::class, 'confirmarPago'])->name('pago.confirmar');
+        // Rutas de retorno de Mercado Pago
+        Route::get('/exito', [PagoController::class, 'pagoExito'])->name('pago.exito');
+        Route::get('/fallo', [PagoController::class, 'pagoFallo'])->name('pago.fallo');
+        Route::get('/pendiente', [PagoController::class, 'pagoPendiente'])->name('pago.pendiente');
     });
 
     // Rutas para Nosotros y Contacto
     Route::get('/nosotros', function () {
         return view('nosotros');
     })->name('nosotros');
-    
+
     Route::get('/contacto', function () {
         return view('contacto');
     })->name('contacto');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

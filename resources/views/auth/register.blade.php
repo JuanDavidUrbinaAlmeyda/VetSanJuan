@@ -82,16 +82,7 @@
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm" style="background-color: #080286;">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-                <img src="{{ asset('favicon.png') }}" alt="Logo" width="40" height="40" class="me-2">
-                <span class="fw-bold">VetSanJuan</span>
-            </a>
-            
-        </div>
-    </nav>
+ 
 
     <!-- Contenido Principal -->
     <div class="container d-flex justify-content-center align-items-center min-vh-100 py-5">

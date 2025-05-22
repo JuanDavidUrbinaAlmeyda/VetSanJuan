@@ -16,6 +16,7 @@
         font-size: 3rem;
         font-weight: 800;
         margin-bottom: 1rem;
+        color:white;
     }
 
     .hero-contacto p {

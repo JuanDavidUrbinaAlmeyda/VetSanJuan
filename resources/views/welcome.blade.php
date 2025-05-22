@@ -150,21 +150,27 @@
             <!-- Peluquería y Baño -->
             <div class="col-6 col-md-3 mb-4">
                 <div class="icon-circle mx-auto" style="width: 100px; height: 100px; padding: 15px;">
+                    <a href="{{route('dashboard')}}#peluqueria">
                     <img src="{{ asset('tijeras.png') }}" alt="Peluquería y Baño" class="img-fluid">
+                    </a>
                 </div>
                 <h5 class="mt-2">Baño y Peluquería</h5>
             </div>
             <!-- Veterinaria -->
             <div class="col-6 col-md-3 mb-4">
                 <div class="icon-circle mx-auto" style="width: 100px; height: 100px; padding: 15px;">
+                    <a href="{{route('dashboard')}}#veterinaria">
                     <img src="{{ asset('vet.png') }}" alt="Veterinaria" class="img-fluid">
+                    </a>
                 </div>
                 <h5 class="mt-2">Veterinaria</h5>
             </div>
             <!-- Vacunación -->
             <div class="col-6 col-md-3 mb-4">
                 <div class="icon-circle mx-auto" style="width: 100px; height: 100px; padding: 15px;">
+                    <a href="{{route('dashboard')}}#vacunacion">
                     <img src="{{ asset('jer.png') }}" alt="Vacunación" class="img-fluid">
+                    </a>
                 </div>
                 <h5 class="mt-2">Vacunación</h5>
             </div>
@@ -179,11 +185,7 @@
             @forelse($productosDestacados as $producto)
                 <div class="col">
                     <div class="card producto-card h-100 border rounded position-relative">
-                        @if($producto->imagen)
-                            <img src="{{ asset('storage/' . $producto->imagen) }}" class="card-img-top p-3" alt="{{ $producto->nombre }}">
-                        @else
-                            <img src="{{ asset('placeholder.jpg') }}" class="card-img-top p-3" alt="Imagen no disponible">
-                        @endif
+                        <img src="{{$producto->imagen}}" class="card-img-top" alt="{{ $producto->nombre }}">
                         <div class="card-body text-center">
                             <p class="mb-1 text-muted">{{ $producto->marca->nombre }}</p>
                             <h6 class="card-title">{{ $producto->nombre }}</h6>

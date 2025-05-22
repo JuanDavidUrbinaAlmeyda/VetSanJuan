@@ -196,7 +196,7 @@
                     data-name="{{ strtolower($producto->nombre) }}"
                     data-price="{{ $producto->precio_unitario }}">
                     <div class="card h-100 shadow-sm border-0 rounded-4">
-                        <img src="{{ asset('storage/' . $producto->imagen) }}" class="card-img-top rounded-top-4" alt="{{ $producto->nombre }}">
+                        <img src="{{$producto->imagen }}" class="card-img-top rounded-top-4" alt="{{ $producto->nombre }}">
                         <div class="card-body text-center">
                             <h5 class="card-title">{{ $producto->nombre }}</h5>
                             <p class="card-text text-primary fw-bold">

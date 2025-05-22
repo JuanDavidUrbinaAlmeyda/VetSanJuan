@@ -14,14 +14,14 @@ class MascotaController extends Controller
         $request->validate([
             'nombre_mascota' => 'required|string|max:255',
             'fecha_nacimiento' => 'required|date',
-            'especie_id' => 'required|exists:especies,id',
-            'sexo_id' => 'required|exists:sexos,id',
+            'especie_id' => 'required|exists:especie,id',
+            'sexo_id' => 'required|exists:sexo,id',
             'edad' => 'required|numeric',
             'peso' => 'nullable|numeric',
             'vacunas' => 'nullable|string',
             'alergias' => 'nullable|string',
             'comentarios' => 'nullable|string',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'foto' => 'nullable|string|url',
         ]);
 
         // Obtener el cliente asociado al usuario autenticado
@@ -42,13 +42,9 @@ class MascotaController extends Controller
         $mascota->vacunas = $request->vacunas;
         $mascota->alergias = $request->alergias;
         $mascota->comentarios = $request->comentarios;
+        $mascota->foto = $request->foto;
         
-        if ($request->hasFile('foto')) {
-            $imagen = $request->file('foto');
-            $nombreImagen = time() . '.' . $imagen->getClientOriginalExtension();
-            $imagen->move(public_path('mascotas'), $nombreImagen);
-            $mascota->foto = 'mascotas/' . $nombreImagen;
-        }
+ 
 
         $mascota->save();
 

@@ -34,7 +34,4 @@ class Producto extends Model
         return $this->belongsTo(Marca::class);
     }
 
-    protected $casts = [
-        'imagen' => 'array'
-    ];
 }
